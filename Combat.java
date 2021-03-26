@@ -3,13 +3,14 @@ import java.util.ArrayList; // import the ArrayList class
  * Write a description of class Combat here.
  *
  * @author James McKenzie
- * @version 25/03/21
+ * @version 26/03/21
  */
 public class Combat
 {
     // Make two warbands
     private ArrayList<Card> opponent = new ArrayList<Card>();
     private ArrayList<Card> player = new  ArrayList<Card>();
+    // Set the max attack and health values
     private final int MAXATTACK = 128;
     private final int MAXHEALTH = 128;
     
@@ -21,8 +22,8 @@ public class Combat
     public Combat()
     {
         // Populate on creation
-        this.populateOpponent();
         this.populatePlayer();
+        this.populateOpponent();
     }
 
     /**
@@ -43,7 +44,9 @@ public class Combat
             name = names[(int) ((Math.random() * names.length) +1)];
             attackValue = (int) ((Math.random() * MAXATTACK) + 1);
             health = (int) ((Math.random() * MAXHEALTH) + 1);
-            opponent.add(new Card(name, attackValue, health));
+            Card card = new Card(name, attackValue, health);
+            System.out.print(card);
+            opponent.add(card);
         } while (opponent.size() <= 7);
     }
     
@@ -60,7 +63,9 @@ public class Combat
             name = names[(int) ((Math.random() * names.length) +1)];
             attackValue = (int) ((Math.random() * MAXATTACK) + 1);
             health = (int) ((Math.random() * MAXHEALTH) + 1);
-            player.add(new Card(name, attackValue, health));
+            Card card = new Card(name, attackValue, health);
+            System.out.print(card);
+            player.add(card);
         } while (player.size() <= 7);
     }
     
@@ -69,38 +74,102 @@ public class Combat
      */
     public void battle()
     {
-        int first;
+        
+        int first = 0;
         Card attacker;
         Card defender;
+        int attackerIdx;
+        int defenderIdx;
+        int attackAmt;
+        boolean noMinions = false;
         
+        
+        while (noMinions == false)
+        {
+            
             // Determine who attacks first
             if (opponent.size() > player.size())
             {
-                first = 0;
+                first = 1;
             }
             else if (player.size() > opponent.size())
             {
-                first = 1;
+                first = 2;
             }
-        // Need to set this inside a var, idk it didnt work otherwise
+            else if (player.size() == opponent.size())
+            {
+                first = (int) (1 + Math.random() * 2);
+            }
             
-        int attackerIdx = (int) (Math.random() * opponent.size());
-        int defenderIdx = (int) (Math.random() * player.size());
+            // If opponent attacks first
+            if (first <= 1)
+            {
+                for (int i = 0; i < opponent.size(); i++)
+                {
+                    attacker = opponent.get(i);
+                    defenderIdx = (int) (Math.random() * player.size());
+                    defender = player.get(defenderIdx);
+                    
+                    // Get attack and deal to defender
+                    attackAmt = attacker.getAttack();
+                    
+                    defender.takeDamage(attackAmt); // Deal attack
+                    
+                    // Defender attack back (only if it hasn't been killed already though)
+                    if (defender.isActive())
+                        attacker.takeDamage(defender.getAttack());
+                    
+                    // Check if cards are active
+                    if (!attacker.isActive())
+                    {
+                       opponent.remove(attacker); 
+                    }
+                    
+                    if (!defender.isActive())
+                    {
+                       player.remove(defender); 
+                    }
+                }
+            }
+            // If player attacks first
+            if (first > 1)
+            {
+               for (int i = 0; i < player.size(); i++)
+                {
+                    attacker = player.get(i);
+                    defenderIdx = (int) (Math.random() * opponent.size());
+                    defender = opponent.get(defenderIdx);
+                    
+                    // Get attack and deal to defender
+                    attackAmt = attacker.getAttack();
+                    
+                    defender.takeDamage(attackAmt); // Deal attack
+                    
+                    // Defender attack back (only if it hasn't been killed already though)
+                    if (defender.isActive())
+                        attacker.takeDamage(defender.getAttack());
+                    
+                    // Check if cards are active
+                    if (!attacker.isActive())
+                    {
+                       player.remove(attacker); 
+                    }
+                    
+                    if (!defender.isActive())
+                    {
+                       opponent.remove(defender); 
+                    }
+                } 
+            }
             
-        attacker = opponent.get(attackerIdx);
-        defender = player.get(defenderIdx);
-            
-            // Get attack and deal to enemy
-            int attackAmt = attacker.getAttack();
-            
-            defender.takeDamage(attackAmt); // Deal attack
+            // Check the winner
+            if (player.size() == 0 && opponent.size() != 0)
+            {
+               noMinions = true; 
+            }
             
             
-            // Defender attack back
-            attacker.takeDamage(defender.getAttack());
-            
-            
-        
+        }
     } 
     
     public static void main(String[] args)

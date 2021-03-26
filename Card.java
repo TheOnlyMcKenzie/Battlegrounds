@@ -2,8 +2,8 @@
 /**
  * Write a description of class Card here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author James McKenzie
+ * @version 26/03/21
  */
 public class Card
 {
