@@ -3,7 +3,7 @@
  * Write a description of class Card here.
  *
  * @author James McKenzie
- * @version 26/03/21
+ * @version 30/03/21
  */
 public class Card
 {

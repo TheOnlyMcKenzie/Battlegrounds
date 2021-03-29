@@ -22,35 +22,34 @@ public class Minions
     }
 
     /**
-     * An example of a method - replace this comment with your own
+     * Fill the array with Minion names
      *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * 
      */
     public void fillArray()
     {
         minionNames = new String[MINIONS];
         // name the minions - they will be given proper names later
-        minionNames[0] = "Minion 1";
-        minionNames[1] = "Minion 2";
-        minionNames[2] = "Minion 3";
-        minionNames[3] = "Minion 4";
-        minionNames[4] = "Minion 5";
-        minionNames[5] = "Minion 6";
-        minionNames[6] = "Minion 7";
-        minionNames[7] = "Minion 8";
-        minionNames[8] = "Minion 9";
-        minionNames[9] = "Minion 10";
-        minionNames[10] = "Minion 11";
-        minionNames[11] = "Minion 12";
-        minionNames[12] = "Minion 13";
-        minionNames[13] = "Minion 14";
-        minionNames[14] = "Minion 15";
-        minionNames[15] = "Minion 16";
-        minionNames[16] = "Minion 17";
-        minionNames[17] = "Minion 18";
-        minionNames[18] = "Minion 19";
-        minionNames[19] = "Minion 20";
+        minionNames[0] = "Vulgar Homunculus";
+        minionNames[1] = "Wrath Weaver";
+        minionNames[2] = "Refreshing Anomaly";
+        minionNames[3] = "Micro Machine";
+        minionNames[4] = "Alleycat";
+        minionNames[5] = "Rockpool Hunter";
+        minionNames[6] = "Scallywag";
+        minionNames[7] = "Kindly Grandmother";
+        minionNames[8] = "Rabid Saurolisk";
+        minionNames[9] = "Imprisoner";
+        minionNames[10] = "Glyph Guardian";
+        minionNames[11] = "Molten Rock";
+        minionNames[12] = "Harvest Golem";
+        minionNames[13] = "Unstable Ghoul";
+        minionNames[14] = "Manchester Baby";
+        minionNames[15] = "EEEEEEEEEEEEEEEEE";
+        minionNames[16] = "My Magic Monkey Friend";
+        minionNames[17] = "Imp Gang Boss";
+        minionNames[18] = "CEO of Antifa";
+        minionNames[19] = "Hangry Dragon";
         
         
     }
